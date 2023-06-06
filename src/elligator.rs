@@ -65,8 +65,8 @@ pub fn shitty_elligator(i: usize, mont_A: &BigUint) -> (BigUint, BigUint, BigUin
         my = fp_mul(&u, &py);
 
         //p on E, m on twist
-        assert!(rhs(&px, &mont_A) == fp_sq(&py));
-        assert!(rhs(&mx, &mont_A) == fp_neg(&fp_sq(&my)));
+        assert!(rhs(&px, mont_A) == fp_sq(&py));
+        assert!(rhs(&mx, mont_A) == fp_neg(&fp_sq(&my)));
         return (px, py, mx, my);
     } else {
         assert!(tmpy2 == fp_neg(&rhspx));
@@ -74,8 +74,8 @@ pub fn shitty_elligator(i: usize, mont_A: &BigUint) -> (BigUint, BigUint, BigUin
         my = fp_neg(&fp_mul(&u, &py));           //py is i*something so multiplying with i*u gives the fp_neg
 
         //p on twist, m on E
-        assert!(rhs(&px, &mont_A) == fp_neg(&fp_sq(&py)));
-        assert!(rhs(&mx, &mont_A) == fp_sq(&my));
+        assert!(rhs(&px, mont_A) == fp_neg(&fp_sq(&py)));
+        assert!(rhs(&mx, mont_A) == fp_sq(&my));
         return (mx, my, px, py);
     }
 }

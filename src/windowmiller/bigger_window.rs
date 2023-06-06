@@ -67,8 +67,8 @@ pub fn precompute(
         },
     );
 
-    (t, f) = double(t, f, &rx, &ry, mont_A);
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //3T
+    (t, f) = double(t, f, rx, ry, mont_A);
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //3T
 
     let p3 = Point {
         x2: t.x2.clone(),
@@ -81,8 +81,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A);
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A);
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p5 = Point {
         x2: t.x2.clone(),
@@ -95,8 +95,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p7 = Point {
         x2: t.x2.clone(),
@@ -109,8 +109,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p9 = Point {
         x2: t.x2.clone(),
@@ -123,8 +123,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p11 = Point {
         x2: t.x2.clone(),
@@ -137,8 +137,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p13 = Point {
         x2: t.x2.clone(),
@@ -151,8 +151,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p15 = Point {
         x2: t.x2.clone(),
@@ -165,8 +165,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p17 = Point {
         x2: t.x2.clone(),
@@ -179,8 +179,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p19 = Point {
         x2: t.x2.clone(),
@@ -193,8 +193,8 @@ pub fn precompute(
         im: f.im.clone(),
     };
 
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
-    (t, f) = add(t, &p, f, &f1, &rx, &ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
+    (t, f) = add(t, p, f, &f1, rx, ry, mont_A); //2T
 
     let p21 = Point {
         x2: t.x2.clone(),
@@ -417,250 +417,250 @@ pub fn manual_window(
     let mut f = f_in;
 
     //1       <-- can be ignored
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p13, f, &f13min, &rx, &ry, mont_A);           //SUB 13
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p19, f, &f19min, &rx, &ry, mont_A);           //SUB 19
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p9, f, &f9, &rx, &ry, mont_A);                     //ADD 9
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p3, f, &f3min, &rx, &ry, mont_A);             //SUB 3
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p9, f, &f9min, &rx, &ry, mont_A);             //SUB 9
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p15, f, &f15min, &rx, &ry, mont_A);           //SUB 15
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(11, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p11, f, &f11, &rx, &ry, mont_A);                   //ADD 11
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p5, f, &f5min, &rx, &ry, mont_A);             //SUB 5
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p13, f, &f13, &rx, &ry, mont_A);                   //ADD 13
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p11, f, &f11, &rx, &ry, mont_A);                   //ADD 11
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p3, f, &f3, &rx, &ry, mont_A);                     //ADD 3
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p19, f, &f19, &rx, &ry, mont_A);                   //ADD 19
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p21, f, &f21min, &rx, &ry, mont_A);           //SUB 21
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p17, f, &f17, &rx, &ry, mont_A);                   //ADD 17
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p19, f, &f19min, &rx, &ry, mont_A);           //SUB 19
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p15, f, &f15, &rx, &ry, mont_A);                   //ADD 15
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p17, f, &f17min, &rx, &ry, mont_A);           //SUB 17
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p9, f, &f9min, &rx, &ry, mont_A);             //SUB 9
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p17, f, &f17, &rx, &ry, mont_A);                   //ADD 17
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p3, f, &f3, &rx, &ry, mont_A);                     //ADD 3
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p19, f, &f19, &rx, &ry, mont_A);                   //ADD 19
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p5, f, &f5min, &rx, &ry, mont_A);             //SUB 5
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = subtract(t, &p1, f, &f1min, &rx, &ry, mont_A);             //SUB 1
-    (t, f) = n_double(7, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p13, f, &f13min, &rx, &ry, mont_A);           //SUB 13
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p13, f, &f13, &rx, &ry, mont_A);                   //ADD 13
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p19, f, &f19, &rx, &ry, mont_A);                   //ADD 19
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p9, f, &f9, &rx, &ry, mont_A);                     //ADD 9
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p5, f, &f5min, &rx, &ry, mont_A);             //SUB 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p5, f, &f5, &rx, &ry, mont_A);                     //ADD 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p3, f, &f3min, &rx, &ry, mont_A);             //SUB 3
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p19, f, &f19min, &rx, &ry, mont_A);           //SUB 19
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p21, f, &f21min, &rx, &ry, mont_A);           //SUB 21
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p5, f, &f5min, &rx, &ry, mont_A);             //SUB 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p21, f, &f21min, &rx, &ry, mont_A);           //SUB 21
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(6, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p13, f, &f13min, &rx, &ry, mont_A);           //SUB 13
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p21, f, &f21, &rx, &ry, mont_A);                   //ADD 21
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p5, f, &f5, &rx, &ry, mont_A);                     //ADD 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p11, f, &f11, &rx, &ry, mont_A);                   //ADD 11
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p3, f, &f3, &rx, &ry, mont_A);                     //ADD 3
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p13, f, &f13, &rx, &ry, mont_A);                   //ADD 13
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = subtract(t, &p1, f, &f1min, &rx, &ry, mont_A);             //SUB 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = add(t, &p1, f, &f1, &rx, &ry, mont_A);                     //ADD 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p15, f, &f15min, &rx, &ry, mont_A);           //SUB 15
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p19, f, &f19min, &rx, &ry, mont_A);           //SUB 19
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p15, f, &f15, &rx, &ry, mont_A);                   //ADD 15
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p19, f, &f19, &rx, &ry, mont_A);                   //ADD 19
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = subtract(t, &p1, f, &f1min, &rx, &ry, mont_A);             //SUB 1
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p5, f, &f5, &rx, &ry, mont_A);                     //ADD 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p3, f, &f3min, &rx, &ry, mont_A);             //SUB 3
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p11, f, &f11, &rx, &ry, mont_A);                   //ADD 11
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p21, f, &f21min, &rx, &ry, mont_A);           //SUB 21
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p21, f, &f21, &rx, &ry, mont_A);                   //ADD 21
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p13, f, &f13, &rx, &ry, mont_A);                   //ADD 13
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p9, f, &f9, &rx, &ry, mont_A);                     //ADD 9
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p9, f, &f9min, &rx, &ry, mont_A);             //SUB 9
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p7, f, &f7, &rx, &ry, mont_A);                     //ADD 7
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p21, f, &f21, &rx, &ry, mont_A);                   //ADD 21
-    (t, f) = n_double(1, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p3, f, &f3min, &rx, &ry, mont_A);             //SUB 3
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p7, f, &f7min, &rx, &ry, mont_A);             //SUB 7
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(3, t, f, &rx, &ry, mont_A);    
-    (t, f) = subtract(t, &p5, f, &f5min, &rx, &ry, mont_A);             //SUB 5
-    (t, f) = n_double(2, t, f, &rx, &ry, mont_A); 
-    (t, f) = n_double(5, t, f, &rx, &ry, mont_A);                   
-    (t, f) = add(t, &p17, f, &f17, &rx, &ry, mont_A);                   //ADD 17
-    (t, f) = n_double(4, t, f, &rx, &ry, mont_A); 
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
-    (t, f) = subtract(t, &p1, f, &f1min, &rx, &ry, mont_A);             //SUB 1
-    (t, f) = double(t, f, &rx, &ry, mont_A); 
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p13, f, f13min, rx, ry, mont_A);           //SUB 13
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p19, f, f19min, rx, ry, mont_A);           //SUB 19
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p9, f, f9, rx, ry, mont_A);                     //ADD 9
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p3, f, f3min, rx, ry, mont_A);             //SUB 3
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p9, f, f9min, rx, ry, mont_A);             //SUB 9
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(5, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p15, f, f15min, rx, ry, mont_A);           //SUB 15
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(11, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p11, f, f11, rx, ry, mont_A);                   //ADD 11
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p5, f, f5min, rx, ry, mont_A);             //SUB 5
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p13, f, f13, rx, ry, mont_A);                   //ADD 13
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p11, f, f11, rx, ry, mont_A);                   //ADD 11
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p3, f, f3, rx, ry, mont_A);                     //ADD 3
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p19, f, f19, rx, ry, mont_A);                   //ADD 19
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p21, f, f21min, rx, ry, mont_A);           //SUB 21
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p17, f, f17, rx, ry, mont_A);                   //ADD 17
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p19, f, f19min, rx, ry, mont_A);           //SUB 19
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p15, f, f15, rx, ry, mont_A);                   //ADD 15
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p17, f, f17min, rx, ry, mont_A);           //SUB 17
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p9, f, f9min, rx, ry, mont_A);             //SUB 9
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p17, f, f17, rx, ry, mont_A);                   //ADD 17
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p3, f, f3, rx, ry, mont_A);                     //ADD 3
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p19, f, f19, rx, ry, mont_A);                   //ADD 19
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p5, f, f5min, rx, ry, mont_A);             //SUB 5
+    (t, f) = n_double(5, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = subtract(t, p1, f, f1min, rx, ry, mont_A);             //SUB 1
+    (t, f) = n_double(7, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p13, f, f13min, rx, ry, mont_A);           //SUB 13
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p13, f, f13, rx, ry, mont_A);                   //ADD 13
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p19, f, f19, rx, ry, mont_A);                   //ADD 19
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p9, f, f9, rx, ry, mont_A);                     //ADD 9
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p5, f, f5min, rx, ry, mont_A);             //SUB 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p5, f, f5, rx, ry, mont_A);                     //ADD 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p3, f, f3min, rx, ry, mont_A);             //SUB 3
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p19, f, f19min, rx, ry, mont_A);           //SUB 19
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p21, f, f21min, rx, ry, mont_A);           //SUB 21
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p5, f, f5min, rx, ry, mont_A);             //SUB 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p21, f, f21min, rx, ry, mont_A);           //SUB 21
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(6, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p13, f, f13min, rx, ry, mont_A);           //SUB 13
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p21, f, f21, rx, ry, mont_A);                   //ADD 21
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p5, f, f5, rx, ry, mont_A);                     //ADD 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p11, f, f11, rx, ry, mont_A);                   //ADD 11
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p3, f, f3, rx, ry, mont_A);                     //ADD 3
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p13, f, f13, rx, ry, mont_A);                   //ADD 13
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = subtract(t, p1, f, f1min, rx, ry, mont_A);             //SUB 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = add(t, p1, f, f1, rx, ry, mont_A);                     //ADD 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p15, f, f15min, rx, ry, mont_A);           //SUB 15
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p19, f, f19min, rx, ry, mont_A);           //SUB 19
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p15, f, f15, rx, ry, mont_A);                   //ADD 15
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p19, f, f19, rx, ry, mont_A);                   //ADD 19
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = subtract(t, p1, f, f1min, rx, ry, mont_A);             //SUB 1
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p5, f, f5, rx, ry, mont_A);                     //ADD 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(5, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p3, f, f3min, rx, ry, mont_A);             //SUB 3
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p11, f, f11, rx, ry, mont_A);                   //ADD 11
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p21, f, f21min, rx, ry, mont_A);           //SUB 21
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p21, f, f21, rx, ry, mont_A);                   //ADD 21
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p13, f, f13, rx, ry, mont_A);                   //ADD 13
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p9, f, f9, rx, ry, mont_A);                     //ADD 9
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p9, f, f9min, rx, ry, mont_A);             //SUB 9
+    (t, f) = n_double(5, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p7, f, f7, rx, ry, mont_A);                     //ADD 7
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(5, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p21, f, f21, rx, ry, mont_A);                   //ADD 21
+    (t, f) = n_double(1, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p3, f, f3min, rx, ry, mont_A);             //SUB 3
+    (t, f) = n_double(3, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(4, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p7, f, f7min, rx, ry, mont_A);             //SUB 7
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(3, t, f, rx, ry, mont_A);    
+    (t, f) = subtract(t, p5, f, f5min, rx, ry, mont_A);             //SUB 5
+    (t, f) = n_double(2, t, f, rx, ry, mont_A); 
+    (t, f) = n_double(5, t, f, rx, ry, mont_A);                   
+    (t, f) = add(t, p17, f, f17, rx, ry, mont_A);                   //ADD 17
+    (t, f) = n_double(4, t, f, rx, ry, mont_A); 
+    (t, f) = double(t, f, rx, ry, mont_A); 
+    (t, f) = subtract(t, p1, f, f1min, rx, ry, mont_A);             //SUB 1
+    (t, f) = double(t, f, rx, ry, mont_A); 
 
     f
 }

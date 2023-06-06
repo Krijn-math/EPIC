@@ -66,7 +66,7 @@ pub fn fast_verif_with_gen(tpx: &BigUint, tpy: &BigUint, tmx: &BigUint, tmy: &Bi
     let zetare = fp_mul(&fp_sub(&asq, &bsq), &abinv);
     print_big_cost();
 
-    check_if_primitive(&zetare, &log)
+    check_if_primitive(&zetare, log)
 }
 
 

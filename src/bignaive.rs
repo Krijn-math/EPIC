@@ -27,13 +27,13 @@ pub fn naive_algorithm(px: &BigUint, mont_A: &BigUint) -> bool {
         let k: BigUint = ((&*CSIDH512 + &*BIGONE) >> 2) / ELLS[i].to_biguint().unwrap();
         let x: BigUint;
         let z: BigUint;
-        (x, z) = spe_ladder(&k, &p4, &mont_A);
+        (x, z) = spe_ladder(&k, &p4, mont_A);
         if is_zero(&x) | is_zero(&z) {
             return false;
         }
     }
 
-    return true;
+    true
 
 }
 

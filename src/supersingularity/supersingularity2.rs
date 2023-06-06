@@ -16,12 +16,12 @@ lazy_static! {
     pub static ref NUUU: usize = UUU.len();
 
         
-    pub static ref pUUU: BigUint = BigUint::parse_bytes(b"10A59877399FC365649BD0A396FF5CCF84EAAEB92E2E947EA2113B6E1D850F5F7C67", 16).unwrap();
-    pub static ref cofacU: BigUint = BigUint::parse_bytes(b"61C0D66BDC739EEA6B062B4B8773657BA5C8DC4BFA21428704A6F45CE2624", 16).unwrap();
+    pub static ref PUUU: BigUint = BigUint::parse_bytes(b"10A59877399FC365649BD0A396FF5CCF84EAAEB92E2E947EA2113B6E1D850F5F7C67", 16).unwrap();
+    pub static ref COFACU: BigUint = BigUint::parse_bytes(b"61C0D66BDC739EEA6B062B4B8773657BA5C8DC4BFA21428704A6F45CE2624", 16).unwrap();
 
     pub static ref BOUND: BigUint = BigUint::parse_bytes(b"2856F1399D91D6592142B95420000000000000000000000000000000000000000", 16).unwrap();
 
-    pub static ref NAFUUU: Vec<i8> = naf(&(*pUUU).clone().to_bigint().unwrap());
+    pub static ref NAFUUU: Vec<i8> = naf(&(*PUUU).clone().to_bigint().unwrap());
 
 }
 
@@ -117,7 +117,7 @@ pub fn is_supersingular(mont_A: &BigUint) -> bool{
     print_big_cost();
 
     //we can adapt this to also keep track of py, so do arithmetic not just x-only
-    let (tx, tz) = spe_ladder(&*cofacU, &px, mont_A);
+    let (tx, tz) = spe_ladder(&*COFACU, &px, mont_A);
     print_big_cost();
 
 
@@ -126,7 +126,7 @@ pub fn is_supersingular(mont_A: &BigUint) -> bool{
     print_big_cost();
 
     reset_big_cost();
-    let (fxre, fxim) = nafumiller(&*pUUU, &tx, &ty, &qx, &qy, &mont_A);
+    let (fxre, fxim) = nafumiller(&*PUUU, &tx, &ty, &qx, &qy, &mont_A);
 
     print_big_cost();
 
@@ -143,7 +143,7 @@ pub fn is_supersingular(mont_A: &BigUint) -> bool{
 
     //Step 2:
     //this can be done with lucaspow because zeta now has norm 1
-    zetare = lucaspow(&zetare, &*cofacU);
+    zetare = lucaspow(&zetare, &*COFACU);
 
     //print_big_cost();
 

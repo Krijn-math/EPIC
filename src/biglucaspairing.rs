@@ -29,13 +29,11 @@ pub fn lucasPowOrderRec(are: &BigUint, low: usize, upp: usize, mut m: BigUint) -
 
     let mid: usize = mid(upp, low);
     let k: BigUint = ProdVec(&ELLS, low, mid);
-    let lre: BigUint;
-    lre = lucaspow(are, &k);
+    let lre: BigUint = lucaspow(are, &k);
     m = lucasPowOrderRec(&lre, mid + 1, upp, m);
 
     let k: BigUint = ProdVec(&ELLS, mid + 1, upp);
-    let rre: BigUint;
-    rre = lucaspow(are, &k);
+    let rre: BigUint = lucaspow(are, &k);
 
     lucasPowOrderRec(&rre, low, mid, m)
 }
@@ -47,13 +45,10 @@ pub fn lucascompute_order_product_tree(are: &BigUint) -> BigUint {
 
     //uses product tree to be faster
 
-    let a4re: BigUint;
-    let mut res: BigUint = BigUint::one();
-    (a4re) = lucaspow(are, &4.to_biguint().unwrap());
+    let res: BigUint = BigUint::one();
+    let a4re: BigUint = lucaspow(are, &4.to_biguint().unwrap());
 
-    res = lucasPowOrderRec(&a4re, 0, *NELLS - 1, res);
-
-    res
+    lucasPowOrderRec(&a4re, 0, *NELLS - 1, res)
 }
 
 pub fn lucaspairing_algorithm(
@@ -101,8 +96,7 @@ pub fn reduced_pairing(
     let f = windowmiller(&r, tpx, tpy, tmx, tmy, mont_A);
     let (asq, bsq) = (fp_sq(&f.re), fp_sq(&f.im));
     let abinv = non_constant_inversion(&fp_add(&asq, &bsq));
-    let zetare = fp_mul(&fp_sub(&asq, &bsq), &abinv);
-    zetare
+    fp_mul(&fp_sub(&asq, &bsq), &abinv)
 }
 
 
