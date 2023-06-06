@@ -79,7 +79,7 @@ pub fn xgcd(m: &BigUint, n: &BigUint) -> (BigInt, BigInt, BigInt) {
 }
 
 pub fn non_constant_inversion(m : &BigUint) -> BigUint {
-    let (d, _a, b) = xgcd(&*CSIDH512, &m);
+    let (d, _a, b) = xgcd(&CSIDH512, m);
     assert!(d.to_biguint().unwrap() == (*BIGONE));
     let mut c: BigInt = (*CSIDH512).clone().into();
     c = &b + &c;
@@ -141,10 +141,10 @@ pub fn lucasseq(n: &BigUint, p: &BigUint) -> (BigUint, BigUint) {
 
     for i in (0..BigUint::bits(n)).rev() {
         if BigUint::bit(n, i) {
-            v0 = fp_sub(&fp_mul(&v0, &v1), &p);
+            v0 = fp_sub(&fp_mul(&v0, &v1), p);
             v1 = fp_sub(&fp_sq(&v1), &two);
         } else {
-            v1 = fp_sub(&fp_mul(&v0, &v1), &p);
+            v1 = fp_sub(&fp_mul(&v0, &v1), p);
             v0 = fp_sub(&fp_sq(&v0), &two);
         }    
     }
@@ -159,7 +159,7 @@ pub fn lucaspow(are: &BigUint, n: &BigUint) -> BigUint {
     let mut a: BigUint = (*are).clone();
     let p: BigUint = fp_add(&a, &a);
 
-    let (vn, _vnmin) = lucasseq(&n, &p);    //we do not need v_{n-1}, just Re(zeta^m)
+    let (vn, _vnmin) = lucasseq(n, &p);    //we do not need v_{n-1}, just Re(zeta^m)
 
     if BigUint::bit(&vn, 0) {     //vn is odd, so can divide using + p and shift
         a = (&vn + &*CSIDH512) >> 1;
@@ -175,10 +175,9 @@ pub fn lucaspow_both(are: &BigUint, _aim: &BigUint, n: &BigUint) -> (BigUint, Bi
     //the inverse can be done with xGCD instead of fp_inv to be fast
 
     let mut a: BigUint = (*are).clone();
-    let b: BigUint;
     let p: BigUint = fp_add(&a, &a);
 
-    let (vk, _vkmin) = lucasseq(&n, &p);
+    let (vk, _vkmin) = lucasseq(n, &p);
 
     if BigUint::bit(&vk, 0) {     //vn2a is odd, so can divide using + p and shift
         a = (&vk + &*CSIDH512) >> 1;
@@ -187,8 +186,8 @@ pub fn lucaspow_both(are: &BigUint, _aim: &BigUint, n: &BigUint) -> (BigUint, Bi
     }
 
     let mut b2 = fp_sq(&a);
-    b2 = fp_sub( &*BIGONE, &b2);
-    b = fp_pow(&b2, &*SQRT);
+    b2 = fp_sub( &BIGONE, &b2);
+    let b: BigUint = fp_pow(&b2, &SQRT);
 
     assert!(a != *BIGONE);
     assert!(b2 == fp_sq(&b));
@@ -204,7 +203,7 @@ pub fn lucasonepow(are: &BigUint, n: &BigUint) -> bool {
     let mut a: BigUint = (*are).clone();
     let p: BigUint = fp_add(&a, &a);
 
-    let (vn2a, _vn2a1) = lucasseq(&n, &p);
+    let (vn2a, _vn2a1) = lucasseq(n, &p);
 
     if BigUint::bit(&vn2a, 0) {     //vn2a is odd, so can divide using + p and shift
         a = (&vn2a + &*CSIDH512) >> 1;

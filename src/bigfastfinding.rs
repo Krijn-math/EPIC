@@ -15,7 +15,7 @@ use crate::{elligator::shitty_elligator, multimiller::bigmultimiller::multimille
 pub fn prodvecmiss(vec: &VecDeque<i128>, miss: i128) -> BigUint 
 {
     let prod = vec.iter().fold(1, |acc, &x| acc * x);
-    return (prod/miss).to_biguint().unwrap();
+    (prod/miss).to_biguint().unwrap()
 }
 
 pub fn order_to_vec(order: &BigUint) -> VecDeque<i128>{
@@ -27,7 +27,7 @@ pub fn order_to_vec(order: &BigUint) -> VecDeque<i128>{
     let mut i:i128 = 2;
     while rem > 1 {
         while rem % i == 0 {
-            rem = rem/i;
+            rem /= i;
             res.push_back(i);
         }
         i += 1;
@@ -55,14 +55,14 @@ pub fn fastfinder(mont_A: &BigUint) -> (BigUint, BigUint, BigUint, BigUint) {
     //of seperating the computation of the lines function, from their evaluation in the points Q1, Q1, ...
 
     //first sample quasi-random points on E and twist using elligator
-    let (p1x, p1y, q1x, q1y) = shitty_elligator(1, &mont_A);
-    let (_p2x, _p2y, q2x, q2y) = shitty_elligator(2, &mont_A);
+    let (p1x, p1y, q1x, q1y) = shitty_elligator(1, mont_A);
+    let (_p2x, _p2y, q2x, q2y) = shitty_elligator(2, mont_A);
 
     let qx = vec![ &q1x, &q2x];
     let qy = vec![ &q1y, &q2y];
 
     //we compute the tate pairing
-    let f = multimiller(&*PPLUSONE, &p1x, &p1y, qx, qy, &mont_A);
+    let f = multimiller(&PPLUSONE, &p1x, &p1y, qx, qy, mont_A);
 
     //we reduce the result with the trick
     let (asq1, bsq1) = (fp_sq(&f[0].re), fp_sq(&f[0].im));
@@ -91,7 +91,7 @@ pub fn fastfinder(mont_A: &BigUint) -> (BigUint, BigUint, BigUint, BigUint) {
     //kill the order1 part of zeta 2, and check if it has any of the remaining order
     zeta2 = lucaspow(&zeta2, &order1);
     for ord in rem_ord1 {
-        let check = lucaspow(&zeta2, &prodvecmiss(&rem_ord1, *ord));
+        let check = lucaspow(&zeta2, &prodvecmiss(rem_ord1, *ord));
         if check != *BIGONE {
             m *= ord.to_biguint().unwrap();
         }

@@ -200,11 +200,11 @@ pub fn precompute(
         x2: t.x2.clone(),
         xz: t.xz.clone(),
         z2: t.z2.clone(),
-        yz: t.yz.clone(),
+        yz: t.yz,
     };
     let f21 = Result {
-        re: f.re.clone(),
-        im: f.im.clone(),
+        re: f.re,
+        im: f.im,
     };
 
     let mut biginv = (p1.z2).clone(); //<-- this is one, does not need to be killed

@@ -17,11 +17,11 @@ pub fn double(
     if is_inf(&t.xz, &t.yz, &t.z2) | is_two(&t.xz, &t.yz, &t.z2) {
         //square f, set t to INF
         let (re, im) = fp2sqr(&f.re, &f.im);
-        let x2 = t.x2.clone();
+        let x2 = t.x2;
         let (xz, yz, z2) = ((*BIGZERO).clone(), (*BIGONE).clone(), (*BIGZERO).clone());
         let t_res: Point = Point { x2, xz, yz, z2 };
         let f_res: Result = Result { re, im };
-        return (t_res, f_res);
+        (t_res, f_res)
     } else {
         //double T, get line coeffs
         let (t_res, (lambdax, lambday, lambdaz)) = dbl_and_line(t, mont_A);
@@ -31,7 +31,7 @@ pub fn double(
 
         //square f and multiply by evaluation
         let f_res = square_and_absorb(f, &ellxre, &ellxim);
-        return (t_res, f_res);
+        (t_res, f_res)
     }
 }
 
@@ -47,7 +47,7 @@ pub fn n_double(
     let mut f_res = f;
 
     for _i in 0..n {
-        (t_res, f_res) = double(t_res, f_res, &rx, &ry, mont_A);
+        (t_res, f_res) = double(t_res, f_res, rx, ry, mont_A);
     }
 
     (t_res, f_res)
@@ -69,14 +69,14 @@ pub fn add(
     //if t is two, we do nothing will ell or f
     if is_two(&t.xz, &t.yz, &t.z2) {
         //add P to T, get line coeffs, here tx2 is not actually computed
-        let (t_res, (lambdax, lambday)) = add_and_line(t, &p, rx, mont_A);
-        let re = (f.re).clone();
-        let im = (f.im).clone();
+        let (t_res, (_lambdax, _lambday)) = add_and_line(t, p, rx, mont_A);
+        let re = f.re;
+        let im = f.im;
         return (t_res, Result { re, im });
     }
 
     //add P to T, get line coeffs, here tx2 is not actually computed
-    let (res_t, (lambdax, lambday)) = add_and_line(t, &p, rx, mont_A);
+    let (res_t, (lambdax, lambday)) = add_and_line(t, p, rx, mont_A);
     let (ellxre, ellxim) = give_line_bit(&lambdax, &lambday, ry);
     let res_f = absorb(f, &ellxre, &ellxim);
     let (resre, resim) = fp2mul(&res_f.re, &res_f.im, &fadd.re, &fadd.im);
@@ -93,7 +93,7 @@ pub fn subtract(
     ry: &BigUint,
     mont_A: &BigUint,
 ) -> (Point, Result) {
-    add(t, &neg(&p), f, fsub, &rx, &ry, mont_A)
+    add(t, &neg(p), f, fsub, rx, ry, mont_A)
 }
 
 pub fn windowmiller(
@@ -106,7 +106,7 @@ pub fn windowmiller(
 ) -> Result {
     //cleanmiller but implemented using a window and NAF, using the fact that we can easily add or substract
 
-    let t: Point = point_cast(&px, &py);
+    let t: Point = point_cast(px, py);
     let mut f: Result = Result { re: (*BIGONE).clone(), im: (*BIGZERO).clone() };
 
     let p: AffPoint = AffPoint {
@@ -116,9 +116,9 @@ pub fn windowmiller(
 
     //precomputing the window
     let (p1, p3, p5, p7, p9, p11, p13, p15, p17, p19, p21, f1, f1min, f3, f3min, f5, f5min, f7, f7min, f9, f9min, f11, f11min, f13, f13min, f15, f15min, f17, f17min, f19, f19min, f21, f21min) =
-        precompute(&p, &rx, &ry, &mont_A);
+        precompute(&p, rx, ry, mont_A);
 
-    f = manual_window(t, f, &rx, &ry, &mont_A, &p1, &p3, &p5, &p7, &p9, &p11, &p13, &p15, &p17, &p19, &p21, &f1, &f1min, &f3, &f3min, &f5, &f5min, &f7, &f7min, &f9, &f9min, &f11, &f11min, &f13, &f13min, &f15, &f15min, &f17, &f17min, &f19, &f19min, &f21, &f21min);
+    f = manual_window(t, f, rx, ry, mont_A, &p1, &p3, &p5, &p7, &p9, &p11, &p13, &p15, &p17, &p19, &p21, &f1, &f1min, &f3, &f3min, &f5, &f5min, &f7, &f7min, &f9, &f9min, &f11, &f11min, &f13, &f13min, &f15, &f15min, &f17, &f17min, &f19, &f19min, &f21, &f21min);
     let (re, im) = fp2sqr(&f.re, &f.im);        //last squaring instead of a doubling of T and sq f
     Result {re, im}
 }

@@ -20,7 +20,7 @@ pub fn double(
     //check if t is inf or two
     if is_inf(&t.xz, &t.yz, &t.z2) | is_two(&t.xz, &t.yz, &t.z2) {
         //square f, set t to INF
-        let x2 = t.x2.clone();
+        let x2 = t.x2;
         let (xz, yz, z2) = ((*BIGZERO).clone(), (*BIGONE).clone(), (*BIGZERO).clone());
         let t_res = Point { x2, xz, yz, z2 };
 
@@ -29,7 +29,7 @@ pub fn double(
             f_res[i] = Result { re, im };
         }
 
-        return (t_res, f_res);
+        (t_res, f_res)
     } else {
         //double T, get line coeffs
         let (t_res, (lambdax, lambday, lambdaz)) = dbl_and_line(t, mont_A);
@@ -42,7 +42,7 @@ pub fn double(
             f_res[i] = square_and_absorb(f_res[i].clone(), &ellxre, &ellxim);
         }
 
-        return (t_res, f_res);
+        (t_res, f_res)
     }
 }
 
@@ -81,12 +81,12 @@ pub fn add(
     //if t is two, we do nothing will ell or f
     if is_two(&t.xz, &t.yz, &t.z2) {
         //add P to T, get line coeffs, here tx2 is not actually computed
-        let (t_res, (_lx, _lambday, _l0)) = add_and_line(t, &p, mont_A);
+        let (t_res, (_lx, _lambday, _l0)) = add_and_line(t, p, mont_A);
         return (t_res, f_res);
     }
 
     //add P to T, get line coeffs, here tx2 is not actually computed
-    let (res_t, (lx, lambday, l0)) = add_and_line(t, &p, mont_A);
+    let (res_t, (lx, lambday, l0)) = add_and_line(t, p, mont_A);
     
     if !is_inf(&res_t.xz, &res_t.yz,&res_t.z2){
     for i in 0..rx.len() {
@@ -114,7 +114,7 @@ pub fn subtract(
     ry: Vec<&BigUint>,
     mont_A: &BigUint,
 ) -> (Point, Vec<Result>) {
-    add(t, &neg(&p), f, fsub, rx, ry, mont_A)
+    add(t, &neg(p), f, fsub, rx, ry, mont_A)
 }
 
 pub fn multimiller(
@@ -127,7 +127,7 @@ pub fn multimiller(
 ) -> Vec<Result> {
     //cleanmiller but implemented using a window and NAF, using the fact that we can easily add or substract
 
-    let t: Point = point_cast(&px, &py);
+    let t: Point = point_cast(px, py);
     let mut f: Vec<Result> = vec![ Result { re: (*BIGONE).clone(), im: (*BIGZERO).clone() }; rx.len() ];
 
     let p: AffPoint = AffPoint {
@@ -137,9 +137,9 @@ pub fn multimiller(
 
     //precomputing the window
     let (p1, p3, p5, p7, p9, p11, p13, p15, p17, p19, p21, f1, f1min, f3, f3min, f5, f5min, f7, f7min, f9, f9min, f11, f11min, f13, f13min, f15, f15min, f17, f17min, f19, f19min, f21, f21min) =
-        precompute(&p, rx.clone(), ry.clone(), &mont_A);
+        precompute(&p, rx.clone(), ry.clone(), mont_A);
 
-    f = manual_window(t, f, rx, ry, &mont_A, &p1, &p3, &p5, &p7, &p9, &p11, &p13, &p15, &p17, &p19, &p21, f1, f1min, f3, f3min, f5, f5min, f7, f7min, f9, f9min, f11, f11min, f13, f13min, f15, f15min, f17, f17min, f19, f19min, f21, f21min);
+    f = manual_window(t, f, rx, ry, mont_A, &p1, &p3, &p5, &p7, &p9, &p11, &p13, &p15, &p17, &p19, &p21, f1, f1min, f3, f3min, f5, f5min, f7, f7min, f9, f9min, f11, f11min, f13, f13min, f15, f15min, f17, f17min, f19, f19min, f21, f21min);
     
     for i in 0..f.len(){
         (f[i].re, f[i].im) = fp2sqr(&f[i].re, &f[i].im);        //last squaring instead of a doubling of T and sq f

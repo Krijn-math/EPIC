@@ -47,33 +47,31 @@ pub fn dbl_and_line(
     let mut x2: BigUint = (t.x2).clone();
     let mut xz: BigUint = (t.xz).clone();
     let mut z2: BigUint = (t.z2).clone();
-    let mut yz: BigUint = (t.yz).clone();
+    let mut yz: BigUint = t.yz;
 
     let mut lx: BigUint;
     let mut ly: BigUint;
     let mut l0: BigUint;
-    let v0: BigUint;
 
     let mut xx2: BigUint;
-    let t0: BigUint;
 
     xx2 = fp_add(&yz, &yz);
     ly = fp_sq(&xx2);
     l0 = fp_sub(&x2, &z2);
-    v0 = fp_sq(&l0);
+    let v0: BigUint = fp_sq(&l0);
     l0 = fp_mul(&xx2, &l0);
     lx = fp_mul(&xz, &l0);
     xx2 = fp_mul(&yz, &ly);
     lx = fp_add(&xx2, &lx);
     yz = fp_add(&x2, &z2);
-    yz = fp_mul(&mont_A, &yz);
+    yz = fp_mul(mont_A, &yz);
     xx2 = fp_add(&xz, &xz);
     yz = fp_add(&xx2, &yz);
     yz = fp_add(&xx2, &yz);
     yz = fp_mul(&xx2, &yz);
 
     xx2 = fp_sq(&v0);
-    t0 = fp_sq(&l0);
+    let t0: BigUint = fp_sq(&l0);
     z2 = fp_sq(&ly);
     yz = fp_add(&v0, &yz);
     yz = fp_mul(&l0, &yz);
@@ -94,10 +92,10 @@ pub fn give_line(
     rx: &BigUint,
     ry: &BigUint,
 ) -> (BigUint, BigUint) {
-    let mut resre = fp_mul(&lx, &rx);
-    let resim = fp_mul(&ly, &ry);
+    let mut resre = fp_mul(lx, rx);
+    let resim = fp_mul(ly, ry);
 
-    resre = fp_sub(&l0, &resre);
+    resre = fp_sub(l0, &resre);
 
     (resre, resim)
 }
@@ -108,7 +106,7 @@ pub fn square_and_absorb(
     ellxim: &BigUint,
 ) -> Result {
     let (mut re, mut im) = fp2sqr(&f.re, &f.im);
-    (re, im) = fp2mul(&re, &im, &ellxre, &ellxim);
+    (re, im) = fp2mul(&re, &im, ellxre, ellxim);
     Result{ re, im}
 }
 
@@ -171,7 +169,7 @@ pub fn add_and_line(
 }
 
 pub fn give_line_bit(lambdax: &BigUint, lambday: &BigUint, ry: &BigUint) -> (BigUint, BigUint) {
-    let resim = fp_mul(ry, &lambday);
+    let resim = fp_mul(ry, lambday);
 
     ((*lambdax).clone(), resim)
 }
@@ -181,6 +179,6 @@ pub fn absorb(
     ellxre: &BigUint,
     ellxim: &BigUint,
 ) -> Result {
-    let (re, im) = fp2mul(&f.re, &f.im, &ellxre, &ellxim);
+    let (re, im) = fp2mul(&f.re, &f.im, ellxre, ellxim);
     Result{ re, im }
 }

@@ -13,11 +13,11 @@ pub fn check_if_primitive(zetare: &BigUint, log: &BigUint) -> bool {
     //the primitive root can be given by just the a-value, and we can precompute for the Lucas exponentiation too
     let genre: BigUint = BigUint::parse_bytes(b"51A8DB5255FBE2EC8BF0C8DDDFA3F39A42EEF5271E66D200F11FA0124E506031D72C25A773C8C3A9ED8BFA3C52C613584A177C5C8B2854C2DAE8F54E62686517", 16).unwrap();
 
-    assert!(lucaspow(&genre, &log) == *zetare);
-    let (d, _a, _b) = xgcd(&log, &*PPLUSONE);
+    assert!(lucaspow(&genre, log) == *zetare);
+    let (d, _a, _b) = xgcd(log, &PPLUSONE);
     let e = BigInt::to_biguint(&d).unwrap();
     
-    if (e == *BIGONE) | (e == *BIGTWO) | (e == fp_add(&*BIGTWO, &*BIGTWO)) {
+    if (e == *BIGONE) | (e == *BIGTWO) | (e == fp_add(&BIGTWO, &BIGTWO)) {
        return true
     }
     

@@ -18,24 +18,24 @@ pub fn double(
     mont_A: &BigUint,
 ) -> ((BigUint, BigUint, BigUint, BigUint), (BigUint, BigUint)) {
     //check if t is inf or two
-    if is_inf(&txtz, &tytz, &tz2) | is_two(&txtz, &tytz, &tz2) {
+    if is_inf(txtz, tytz, tz2) | is_two(txtz, tytz, tz2) {
         //square f, set t to INF
-        let (resfxre, resfxim) = fp2sqr(&fxre, &fxim);
+        let (resfxre, resfxim) = fp2sqr(fxre, fxim);
         let restx2 = (*tx2).clone();
         let (restxtz, restytz, restz2) =
             ((*BIGZERO).clone(), (*BIGONE).clone(), (*BIGZERO).clone());
-        return ((restx2, restxtz, restz2, restytz), (resfxre, resfxim));
+        ((restx2, restxtz, restz2, restytz), (resfxre, resfxim))
     } else {
         //double T, get line coeffs
         let ((restx2, restxtz, restz2, restytz), (lambdax, lambday, lambdaz)) =
-            dbl_and_line(&tx2, &txtz, &tz2, &tytz, mont_A);
+            dbl_and_line(tx2, txtz, tz2, tytz, mont_A);
 
         //evaluate line in rx, ry
         let (ellxre, ellxim) = give_line(&lambdax, &lambday, &lambdaz, rx, ry);
 
         //square f and multiply by evaluation
-        let (resfxre, resfxim) = square_and_absorb(&fxre, &fxim, &ellxre, &ellxim);
-        return ((restx2, restxtz, restz2, restytz), (resfxre, resfxim));
+        let (resfxre, resfxim) = square_and_absorb(fxre, fxim, &ellxre, &ellxim);
+        ((restx2, restxtz, restz2, restytz), (resfxre, resfxim))
     }
 }
 
@@ -57,21 +57,21 @@ pub fn add(
     let restz2: BigUint;
     let restytz: BigUint;
 
-    if is_inf(&txtz, &tytz, &tz2) {
+    if is_inf(txtz, tytz, tz2) {
         restxtz = px.clone();
         restytz = py.clone();
         restz2 = (*BIGONE).clone();
-        restx2 = fp_sq(&txtz);
+        restx2 = fp_sq(txtz);
         let resfxre = (*fxre).clone();
         let resfxim = (*fxim).clone();
         return ((restx2, restxtz, restz2, restytz), (resfxre, resfxim));
     }
 
     //if t is two, we do nothing will ell or f
-    if is_two(&txtz, &tytz, &tz2) {
+    if is_two(txtz, tytz, tz2) {
         //add P to T, get line coeffs, here tx2 is not actually computed
         let ((restx2, restxtz, restz2, restytz), (_lambdax, _lambday)) =
-            add_and_line(&txtz, &tz2, &tytz, px, py, rx, mont_A);
+            add_and_line(txtz, tz2, tytz, px, py, rx, mont_A);
         let resfxre = (*fxre).clone();
         let resfxim = (*fxim).clone();
         return ((restx2, restxtz, restz2, restytz), (resfxre, resfxim));
@@ -79,9 +79,9 @@ pub fn add(
 
     //add P to T, get line coeffs, here tx2 is not actually computed
     let ((restx2, restxtz, restz2, restytz), (lambdax, lambday)) =
-        add_and_line(&txtz, &tz2, &tytz, px, py, rx, mont_A);
+        add_and_line(txtz, tz2, tytz, px, py, rx, mont_A);
     let (ellxre, ellxim) = give_line_bit(&lambdax, &lambday, ry);
-    let (resfxre, resfxim) = absorb(&fxre, &fxim, &ellxre, &ellxim);
+    let (resfxre, resfxim) = absorb(fxre, fxim, &ellxre, &ellxim);
 
     ((restx2, restxtz, restz2, restytz), (resfxre, resfxim))
 }
@@ -100,7 +100,7 @@ pub fn subtract(
     mont_A: &BigUint,
 ) -> ((BigUint, BigUint, BigUint, BigUint), (BigUint, BigUint)) {
     add(
-        &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &fp_neg(&py), &rx, &ry, mont_A,
+        tx2, txtz, tz2, tytz, fxre, fxim, px, &fp_neg(py), rx, ry, mont_A,
     )
 }
 
@@ -143,12 +143,12 @@ pub fn cleanmiller(
     //we loop per bit over n
     for i in (0..BigUint::bits(n) - 1).rev() {
         ((tx2, txtz, tz2, tytz), (fxre, fxim)) =
-            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &rx, &ry, mont_A);
+            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, rx, ry, mont_A);
 
         //when the bit is 1
         if BigUint::bit(n, i) {
             ((tx2, txtz, tz2, tytz), (fxre, fxim)) = add(
-                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &py, &rx, &ry, mont_A,
+                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, px, py, rx, ry, mont_A,
             );
         }
     }
@@ -180,18 +180,18 @@ pub fn nafmiller(
     let mut fxim: BigUint = (*BIGZERO).clone();
 
     //we loop per bit over n
-    for i in 1..nafn.len() {
+    for _i in 1..nafn.len() {
         ((tx2, txtz, tz2, tytz), (fxre, fxim)) =
-            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &rx, &ry, mont_A);
+            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, rx, ry, mont_A);
 
         //add or subtract depending on the bit
-        if nafn[i] == 1 {
+        if nafn[_i] == 1 {
             ((tx2, txtz, tz2, tytz), (fxre, fxim)) = add(
-                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &py, &rx, &ry, mont_A,
+                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, px, py, rx, ry, mont_A,
             );
-        } else if nafn[i] == -1 {
+        } else if nafn[_i] == -1 {
             ((tx2, txtz, tz2, tytz), (fxre, fxim)) = subtract(
-                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &py, &rx, &ry, mont_A,
+                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, px, py, rx, ry, mont_A,
             );
         }
     }

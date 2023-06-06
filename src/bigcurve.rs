@@ -154,7 +154,7 @@ mod tests {
         let mut rng = rand::thread_rng();
         let x = rng.gen_biguint(512) % &*CSIDH512;
         let pplusone = &*CSIDH512 + &(*BIGONE);
-        let (_xx, zz) = ladder(&pplusone, &x, &*BIGONE, &mont_A);
+        let (_xx, zz) = ladder(&pplusone, &x, &BIGONE, &mont_A);
         assert!(is_zero(&zz));
     }
 
@@ -165,7 +165,7 @@ mod tests {
         let mut rng = rand::thread_rng();
         let x = rng.gen_biguint(512) % &*CSIDH512;
         let pplustwo = &*CSIDH512 + &(*BIGTWO);
-        let (xx, zz) = ladder(&pplustwo, &x, &*BIGONE, &mont_A);
+        let (xx, zz) = ladder(&pplustwo, &x, &BIGONE, &mont_A);
         println!("x: {}, xx: {}, zz: {}", x, xx, zz);
         assert!(x == to_aff(&xx, &zz));
     }

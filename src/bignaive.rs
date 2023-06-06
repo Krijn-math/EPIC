@@ -85,7 +85,7 @@ pub fn cost_naive_smallx() {
         mul += 3;
         sq += 2;
 
-        let n: BigUint = ((&*CSIDH512 + &*BIGONE)) / ELLS[i].to_biguint().unwrap();
+        let n: BigUint = (&*CSIDH512 + &*BIGONE) / ELLS[i].to_biguint().unwrap();
         let length = BigUint::bits(&n);
         mul += 5 * (length - 1);
         sq += 4 * (length - 1);

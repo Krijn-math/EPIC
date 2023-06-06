@@ -17,7 +17,7 @@ mod nafmiller {
 
 mod supersingularity {
     pub mod doliskani;
-    pub mod supersingularity;
+    pub mod supersingularity1;
     pub mod supersingularity2;
 }
 

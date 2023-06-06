@@ -40,8 +40,7 @@ pub fn lucasPowOrderRecSQRT(
 
     let mid: usize = mid(upp, low);
     let k: BigUint = ProdVec(&ELLS, low, mid);
-    let lre: BigUint;
-    lre = lucaspow(are, &k);
+    let lre: BigUint = lucaspow(are, &k);
     m = lucasPowOrderRecSQRT(&lre, mid + 1, upp, m);
 
     if BigUint::ge(&m, &*BOUND)
@@ -50,22 +49,20 @@ pub fn lucasPowOrderRecSQRT(
     }
 
     let k: BigUint = ProdVec(&ELLS, mid + 1, upp);
-    let rre: BigUint;
-    rre = lucaspow(are, &k);
+    let rre: BigUint = lucaspow(are, &k);
 
     lucasPowOrderRecSQRT(&rre, low, mid, m)
 }
 
 pub fn has_large_order(zetare: &BigUint) -> bool{
-    let a4re: BigUint;
-    (a4re) = lucaspow(zetare, &4.to_biguint().unwrap());
+    let a4re: BigUint = lucaspow(zetare, &4.to_biguint().unwrap());
     let ord = lucasPowOrderRecSQRT(&a4re, 0, *NELLS - 1, BigUint::one());
     BigUint::ge(&ord, &*BOUND)
 }
 
 pub fn is_supersingular(mont_A: &BigUint) -> bool{
-    let (px, py, qx, qy) = shitty_elligator(5, &mont_A);      //can also be implemented based on Elligator-2 map
-    let f = windowmiller(&*PPLUSONE, &px, &py, &qx, &qy, &mont_A);
+    let (px, py, qx, qy) = shitty_elligator(5, mont_A);      //can also be implemented based on Elligator-2 map
+    let f = windowmiller(&PPLUSONE, &px, &py, &qx, &qy, mont_A);
     let (asq, bsq) = (fp_sq(&f.re), fp_sq(&f.im));
     let abinv = non_constant_inversion(&fp_add(&asq, &bsq));
     let zetare = fp_mul(&fp_sub(&asq, &bsq), &abinv);

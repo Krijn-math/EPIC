@@ -23,28 +23,26 @@ pub fn dbl_and_line(
     let mut lx: BigUint;
     let mut ly: BigUint;
     let mut l0: BigUint;
-    let v0: BigUint;
 
     let mut xx2: BigUint;
-    let t0: BigUint;
 
     xx2 = fp_add(&vyz, &vyz);
     ly = fp_sq(&xx2);
     l0 = fp_sub(&vx2, &vz2);
-    v0 = fp_sq(&l0);
+    let v0: BigUint = fp_sq(&l0);
     l0 = fp_mul(&xx2, &l0);
     lx = fp_mul(&vxz, &l0);
     xx2 = fp_mul(&vyz, &ly);
     lx = fp_add(&xx2, &lx);
     vyz = fp_add(&vx2, &vz2);
-    vyz = fp_mul(&mont_A, &vyz);
+    vyz = fp_mul(mont_A, &vyz);
     xx2 = fp_add(&vxz, &vxz);
     vyz = fp_add(&xx2, &vyz);
     vyz = fp_add(&xx2, &vyz);
     vyz = fp_mul(&xx2, &vyz);
 
     xx2 = fp_sq(&v0);
-    t0 = fp_sq(&l0);
+    let t0: BigUint = fp_sq(&l0);
     vz2 = fp_sq(&ly);
     vyz = fp_add(&v0, &vyz);
     vyz = fp_mul(&l0, &vyz);
@@ -65,10 +63,10 @@ pub fn give_line(
     rx: &BigUint,
     ry: &BigUint,
 ) -> (BigUint, BigUint) {
-    let mut resre = fp_mul(&lx, &rx);
-    let resim = fp_mul(&ly, &ry);
+    let mut resre = fp_mul(lx, rx);
+    let resim = fp_mul(ly, ry);
 
-    resre = fp_sub(&l0, &resre);
+    resre = fp_sub(l0, &resre);
 
     (resre, resim)
 }
@@ -79,8 +77,8 @@ pub fn square_and_absorb(
     ellxre: &BigUint,
     ellxim: &BigUint,
 ) -> (BigUint, BigUint) {
-    let (resre, resim) = fp2sqr(&fxre, &fxim);
-    fp2mul(&resre, &resim, &ellxre, &ellxim)
+    let (resre, resim) = fp2sqr(fxre, fxim);
+    fp2mul(&resre, &resim, ellxre, ellxim)
 }
 
 pub fn add_and_line(
@@ -96,25 +94,25 @@ pub fn add_and_line(
     let mut lambdaz: BigUint;
     let mut ellxre: BigUint;
 
-    lambdax = fp_mul(py, &tz);
-    lambdax = fp_sub(&lambdax, &ty);
+    lambdax = fp_mul(py, tz);
+    lambdax = fp_sub(&lambdax, ty);
 
-    lambdaz = fp_mul(px, &tz); //additional trick is that px can be low so implemented as adds
-    lambdaz = fp_sub(&lambdaz, &tx);
+    lambdaz = fp_mul(px, tz); //additional trick is that px can be low so implemented as adds
+    lambdaz = fp_sub(&lambdaz, tx);
 
     let lambdaz2 = fp_sq(&lambdaz); //tmp1 = pow(lambdaz, 2);
-    let tylambdaz2 = fp_mul(&ty, &lambdaz2);
+    let tylambdaz2 = fp_mul(ty, &lambdaz2);
 
     //Get ell = line(t, p, r) = (ry - ty - lambda(rx - tx)) / (rx + tx + px - lambda*lambda + a)
     //note here that rx and px are related for specific points as sampled by us, namely rx = -px
 
     if *rx == fp_neg(px) {
         //something wrong here? TODO:fix
-        ellxre = fp_add(&lambdaz, &tx);
-        ellxre = fp_add(&ellxre, &tx);
+        ellxre = fp_add(&lambdaz, tx);
+        ellxre = fp_add(&ellxre, tx);
     } else {
-        ellxre = fp_mul(rx, &tz);
-        ellxre = fp_sub(&tx, &ellxre);
+        ellxre = fp_mul(rx, tz);
+        ellxre = fp_sub(tx, &ellxre);
     }
 
     ellxre = fp_mul(&ellxre, &lambdaz);
@@ -125,18 +123,18 @@ pub fn add_and_line(
     //right now we just use the (XZ : ZZ : YZ) part and fix it in the end with v
     //perhaps all of this can also be combined well with ellxre
 
-    let tzlambdaz2 = fp_mul(&tz, &lambdaz2); //tmp2 = tz * tmp1;
+    let tzlambdaz2 = fp_mul(tz, &lambdaz2); //tmp2 = tz * tmp1;
     let lambdax2 = fp_sq(&lambdax); //tmp3 = pow(lambdax, 2);
-    let txlambdaz2 = fp_mul(&tx, &lambdaz2); //tmp4 = tx * tmp1; //used in step 1.b and step 3
+    let txlambdaz2 = fp_mul(tx, &lambdaz2); //tmp4 = tx * tmp1; //used in step 1.b and step 3
     let lambdaz3 = fp_mul(&lambdaz2, &lambdaz); //tmp5 = lambdaz * tmp1;
-    let tzlambdax2 = fp_mul(&tz, &lambdax2); //tmp6 = tz * tmp3;
+    let tzlambdax2 = fp_mul(tz, &lambdax2); //tmp6 = tz * tmp3;
 
     let mut newtx = fp_add(px, mont_A);
     newtx = fp_mul(&newtx, &fp_neg(&tzlambdaz2));
     newtx = fp_sub(&newtx, &txlambdaz2);
     newtx = fp_add(&newtx, &tzlambdax2);
 
-    let tmp = fp_mul(&lambdaz3, &ty);
+    let tmp = fp_mul(&lambdaz3, ty);
     let mut newty = fp_sub(&txlambdaz2, &newtx);
     newty = fp_mul(&newty, &lambdax);
     newty = fp_sub(&newty, &tmp);
@@ -145,7 +143,7 @@ pub fn add_and_line(
     let vxz = fp_mul(&tzlambdaz2, &newtx);
     let vz2 = fp_sq(&tzlambdaz2);
     let mut vyz = fp_mul(&lambdaz, &newty);
-    vyz = fp_mul(&tz, &vyz);
+    vyz = fp_mul(tz, &vyz);
 
     ((vx2, vxz, vz2, vyz), (ellxre, tzlambdaz2))
 }
@@ -155,7 +153,7 @@ pub fn give_line_bit(
     lambday: &BigUint,
     ry: &BigUint,
 ) -> (BigUint, BigUint) {
-    let resim = fp_mul(ry, &lambday);
+    let resim = fp_mul(ry, lambday);
 
     ((*lambdax).clone(), resim)
 }
@@ -166,7 +164,7 @@ pub fn absorb(
     ellxre: &BigUint,
     ellxim: &BigUint,
 ) -> (BigUint, BigUint) {
-    fp2mul(&fxre, &fxim, &ellxre, &ellxim)
+    fp2mul(fxre, fxim, ellxre, ellxim)
 }
 
 pub fn miller(

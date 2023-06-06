@@ -10,7 +10,7 @@ pub fn fp2add(
     qre: &BigUint,
     qim: &BigUint,
 )   -> (BigUint, BigUint) {
-    (fp_add(&pre, &qre), fp_add(&pim, &qim))
+    (fp_add(pre, qre), fp_add(pim, qim))
 }
 
 pub fn fp2sub(
@@ -19,7 +19,7 @@ pub fn fp2sub(
     qre: &BigUint,
     qim: &BigUint,
 )   -> (BigUint, BigUint) {
-    (fp_sub(&pre, &qre), fp_sub(&pim, &qim))
+    (fp_sub(pre, qre), fp_sub(pim, qim))
 }
 
 pub fn spe_add_fp2(
@@ -36,13 +36,13 @@ pub fn spe_add_fp2(
 ) -> (BigUint, BigUint, BigUint, BigUint) {
     //x-only differential addition of p and q, given p - q as (spex, 1)
 
-    let (mut v0re, mut v0im) = fp2add(&pxre, pxim, pzre, pzim);
-    let (mut v1re, mut v1im) = fp2sub(&qxre, qxim, qzre, qzim);
+    let (mut v0re, mut v0im) = fp2add(pxre, pxim, pzre, pzim);
+    let (mut v1re, mut v1im) = fp2sub(qxre, qxim, qzre, qzim);
 
     (v1re, v1im) = fp2mul(&v1re, &v1im, &v0re, &v0im);
-    (v0re, v0im) = fp2sub(&pxre, &pxim, &pzre, &pzim);
+    (v0re, v0im) = fp2sub(pxre, pxim, pzre, pzim);
 
-    let (mut v2re, mut v2im) = fp2add(&qxre, &qxim, &qzre, &qzim);
+    let (mut v2re, mut v2im) = fp2add(qxre, qxim, qzre, qzim);
     (v2re, v2im) = fp2mul(&v2re, &v2im, &v0re, &v0im);
 
     let (mut v3re, mut v3im) = fp2add(&v1re, &v1im, &v2re, &v2im);

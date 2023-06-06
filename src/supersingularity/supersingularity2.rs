@@ -49,8 +49,7 @@ pub fn lucasPowOrderRecSQRT(
 
     let mid: usize = mid(upp, low);
     let k: BigUint = ProdVec(&UUU, low, mid);
-    let lre: BigUint;
-    lre = lucaspow(are, &k);
+    let lre: BigUint = lucaspow(are, &k);
     m = lucasPowOrderRecSQRT(&lre, mid + 1, upp, m);
 
     if BigUint::ge(&m, &*BOUND)
@@ -59,14 +58,13 @@ pub fn lucasPowOrderRecSQRT(
     }
 
     let k: BigUint = ProdVec(&UUU, mid + 1, upp);
-    let rre: BigUint;
-    rre = lucaspow(are, &k);
+    let rre: BigUint = lucaspow(are, &k);
 
     lucasPowOrderRecSQRT(&rre, low, mid, m)
 }
 
 pub fn has_large_order(zetare: &BigUint) -> bool {
-    let ord = lucasPowOrderRecSQRT(&zetare, 0, *NUUU - 1, BigUint::one());
+    let ord = lucasPowOrderRecSQRT(zetare, 0, *NUUU - 1, BigUint::one());
     BigUint::ge(&ord, &*BOUND)
 }
 
@@ -93,16 +91,16 @@ pub fn nafumiller(
     //we loop per bit over n
     for i in 1..NAFUUU.len() {
         ((tx2, txtz, tz2, tytz), (fxre, fxim)) =
-            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &rx, &ry, mont_A);
+            double(&tx2, &txtz, &tz2, &tytz, &fxre, &fxim, rx, ry, mont_A);
 
         //add or subtract depending on the bit
         if NAFUUU[i] == 1 {
             ((tx2, txtz, tz2, tytz), (fxre, fxim)) = add(
-                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &py, &rx, &ry, mont_A,
+                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, px, py, rx, ry, mont_A,
             );
         } else if NAFUUU[i] == -1 {
             ((tx2, txtz, tz2, tytz), (fxre, fxim)) = subtract(
-                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, &px, &py, &rx, &ry, mont_A,
+                &tx2, &txtz, &tz2, &tytz, &fxre, &fxim, px, py, rx, ry, mont_A,
             );
         }
         //println!("bit i: {} f is {}", i, to_aff(&fxre, &fxim));
@@ -113,20 +111,20 @@ pub fn nafumiller(
 
 
 pub fn is_supersingular(mont_A: &BigUint) -> bool{
-    let (px, _py, qx, qy) = shitty_elligator(5, &mont_A); 
+    let (px, _py, qx, qy) = shitty_elligator(5, mont_A); 
     print_big_cost();
 
     //we can adapt this to also keep track of py, so do arithmetic not just x-only
-    let (tx, tz) = spe_ladder(&*COFACU, &px, mont_A);
+    let (tx, tz) = spe_ladder(&COFACU, &px, mont_A);
     print_big_cost();
 
 
-    let (tx, ty) = recover(&tx, &tz, &mont_A);
+    let (tx, ty) = recover(&tx, &tz, mont_A);
 
     print_big_cost();
 
     reset_big_cost();
-    let (fxre, fxim) = nafumiller(&*PUUU, &tx, &ty, &qx, &qy, &mont_A);
+    let (fxre, fxim) = nafumiller(&PUUU, &tx, &ty, &qx, &qy, mont_A);
 
     print_big_cost();
 
@@ -143,7 +141,7 @@ pub fn is_supersingular(mont_A: &BigUint) -> bool{
 
     //Step 2:
     //this can be done with lucaspow because zeta now has norm 1
-    zetare = lucaspow(&zetare, &*COFACU);
+    zetare = lucaspow(&zetare, &COFACU);
 
     //print_big_cost();
 

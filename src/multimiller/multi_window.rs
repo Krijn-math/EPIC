@@ -84,7 +84,7 @@ pub fn precompute(
     let p1 = point_cast(&p.x, &p.y);
 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //3T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //3T
 
     let p3 = Point {
         x2: t.x2.clone(),
@@ -97,8 +97,8 @@ pub fn precompute(
     }
 
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p5 = Point {
         x2: t.x2.clone(),
@@ -110,8 +110,8 @@ pub fn precompute(
         f5[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p7 = Point {
         x2: t.x2.clone(),
@@ -123,8 +123,8 @@ pub fn precompute(
         f7[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p9 = Point {
         x2: t.x2.clone(),
@@ -136,8 +136,8 @@ pub fn precompute(
         f9[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p11 = Point {
         x2: t.x2.clone(),
@@ -149,8 +149,8 @@ pub fn precompute(
         f11[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p13 = Point {
         x2: t.x2.clone(),
@@ -162,8 +162,8 @@ pub fn precompute(
         f13[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p15 = Point {
         x2: t.x2.clone(),
@@ -175,8 +175,8 @@ pub fn precompute(
         f15[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p17 = Point {
         x2: t.x2.clone(),
@@ -188,8 +188,8 @@ pub fn precompute(
         f17[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p19 = Point {
         x2: t.x2.clone(),
@@ -201,14 +201,14 @@ pub fn precompute(
         f19[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
     }
 
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
-    (t, f) = add(t, &p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A);
+    (t, f) = add(t, p, f, f1.clone(), rx.clone(), ry.clone(), mont_A); //2T
 
     let p21 = Point {
         x2: t.x2.clone(),
         xz: t.xz.clone(),
         z2: t.z2.clone(),
-        yz: t.yz.clone(),
+        yz: t.yz,
     };
     for i in 0..f.len(){
         f21[i] = Result { re: f[i].re.clone(), im: f[i].im.clone(),  };
@@ -429,247 +429,247 @@ pub fn manual_window(
     //1       <-- can be ignored
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p13, f, f13min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 13
+    (t, f) = subtract(t, p13, f, f13min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 13
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
+    (t, f) = subtract(t, p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p9, f, f9.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 9
+    (t, f) = add(t, p9, f, f9.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 9
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
+    (t, f) = subtract(t, p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p9, f, f9min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 9
+    (t, f) = subtract(t, p9, f, f9min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 9
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p15, f, f15min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 15
+    (t, f) = subtract(t, p15, f, f15min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 15
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(11, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
+    (t, f) = add(t, p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
+    (t, f) = subtract(t, p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
+    (t, f) = add(t, p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
+    (t, f) = add(t, p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p3, f, f3.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 3
+    (t, f) = add(t, p3, f, f3.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 3
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
+    (t, f) = add(t, p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
+    (t, f) = subtract(t, p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p17, f, f17.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 17
+    (t, f) = add(t, p17, f, f17.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 17
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
+    (t, f) = subtract(t, p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p15, f, f15.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 15
+    (t, f) = add(t, p15, f, f15.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 15
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p17, f, f17min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 17
+    (t, f) = subtract(t, p17, f, f17min, rx.clone(), ry.clone(), mont_A);           //SUB 17
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p9, f, f9min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 9
+    (t, f) = subtract(t, p9, f, f9min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 9
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p17, f, f17.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 17
+    (t, f) = add(t, p17, f, f17.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 17
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p3, f, f3.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 3
+    (t, f) = add(t, p3, f, f3.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 3
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
+    (t, f) = add(t, p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
+    (t, f) = subtract(t, p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = subtract(t, &p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
+    (t, f) = subtract(t, p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
     (t, f) = n_double(7, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p13, f, f13min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 13
+    (t, f) = subtract(t, p13, f, f13min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 13
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
+    (t, f) = add(t, p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
+    (t, f) = add(t, p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p9, f, f9.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 9
+    (t, f) = add(t, p9, f, f9.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 9
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
+    (t, f) = subtract(t, p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p5, f, f5.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 5
+    (t, f) = add(t, p5, f, f5.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 5
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
+    (t, f) = subtract(t, p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
+    (t, f) = subtract(t, p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
+    (t, f) = subtract(t, p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
+    (t, f) = subtract(t, p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
+    (t, f) = subtract(t, p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(6, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p13, f, f13min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 13
+    (t, f) = subtract(t, p13, f, f13min, rx.clone(), ry.clone(), mont_A);           //SUB 13
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p21, f, f21.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 21
+    (t, f) = add(t, p21, f, f21.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 21
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p5, f, f5.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 5
+    (t, f) = add(t, p5, f, f5.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 5
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
+    (t, f) = add(t, p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p3, f, f3.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 3
+    (t, f) = add(t, p3, f, f3, rx.clone(), ry.clone(), mont_A);                     //ADD 3
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
+    (t, f) = add(t, p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = subtract(t, &p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
+    (t, f) = subtract(t, p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = add(t, &p1, f, f1.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 1
+    (t, f) = add(t, p1, f, f1, rx.clone(), ry.clone(), mont_A);                     //ADD 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p15, f, f15min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 15
+    (t, f) = subtract(t, p15, f, f15min, rx.clone(), ry.clone(), mont_A);           //SUB 15
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p19, f, f19min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 19
+    (t, f) = subtract(t, p19, f, f19min, rx.clone(), ry.clone(), mont_A);           //SUB 19
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p15, f, f15.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 15
+    (t, f) = add(t, p15, f, f15, rx.clone(), ry.clone(), mont_A);                   //ADD 15
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p19, f, f19.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 19
+    (t, f) = add(t, p19, f, f19, rx.clone(), ry.clone(), mont_A);                   //ADD 19
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = subtract(t, &p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
+    (t, f) = subtract(t, p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p5, f, f5.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 5
+    (t, f) = add(t, p5, f, f5, rx.clone(), ry.clone(), mont_A);                     //ADD 5
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
+    (t, f) = subtract(t, p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p11, f, f11.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 11
+    (t, f) = add(t, p11, f, f11, rx.clone(), ry.clone(), mont_A);                   //ADD 11
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p21, f, f21min.clone(), rx.clone(), ry.clone(), mont_A);           //SUB 21
+    (t, f) = subtract(t, p21, f, f21min, rx.clone(), ry.clone(), mont_A);           //SUB 21
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p21, f, f21.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 21
+    (t, f) = add(t, p21, f, f21.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 21
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p13, f, f13.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 13
+    (t, f) = add(t, p13, f, f13, rx.clone(), ry.clone(), mont_A);                   //ADD 13
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p9, f, f9.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 9
+    (t, f) = add(t, p9, f, f9, rx.clone(), ry.clone(), mont_A);                     //ADD 9
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p9, f, f9min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 9
+    (t, f) = subtract(t, p9, f, f9min, rx.clone(), ry.clone(), mont_A);             //SUB 9
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p7, f, f7.clone(), rx.clone(), ry.clone(), mont_A);                     //ADD 7
+    (t, f) = add(t, p7, f, f7, rx.clone(), ry.clone(), mont_A);                     //ADD 7
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p21, f, f21.clone(), rx.clone(), ry.clone(), mont_A);                   //ADD 21
+    (t, f) = add(t, p21, f, f21, rx.clone(), ry.clone(), mont_A);                   //ADD 21
     (t, f) = n_double(1, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p3, f, f3min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 3
+    (t, f) = subtract(t, p3, f, f3min, rx.clone(), ry.clone(), mont_A);             //SUB 3
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p7, f, f7min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 7
+    (t, f) = subtract(t, p7, f, f7min, rx.clone(), ry.clone(), mont_A);             //SUB 7
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(3, t, f, rx.clone(), ry.clone(), mont_A);    
-    (t, f) = subtract(t, &p5, f, f5min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 5  
+    (t, f) = subtract(t, p5, f, f5min, rx.clone(), ry.clone(), mont_A);             //SUB 5  
     (t, f) = n_double(2, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = n_double(5, t, f, rx.clone(), ry.clone(), mont_A);                   
-    (t, f) = add(t, &p17, f, f17.clone(), rx.clone(), ry.clone(), mont_A);  
+    (t, f) = add(t, p17, f, f17, rx.clone(), ry.clone(), mont_A);  
     (t, f) = n_double(4, t, f, rx.clone(), ry.clone(), mont_A); 
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A); 
-    (t, f) = subtract(t, &p1, f, f1min.clone(), rx.clone(), ry.clone(), mont_A);             //SUB 1
+    (t, f) = subtract(t, p1, f, f1min, rx.clone(), ry.clone(), mont_A);             //SUB 1
     (t, f) = double(t, f, rx.clone(), ry.clone(), mont_A);
 
     f
